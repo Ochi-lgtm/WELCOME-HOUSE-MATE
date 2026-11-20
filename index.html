@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Mate Girls · 4 girls · 1 home · zero money drama</title>
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-muted: #f1f5f9;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-light: #94a3b8;
+      --border-color: #e2e8f0;
+      --accent: #f43f5e;
+      --accent-soft: #ffe4e6;
+      --header-grad: linear-gradient(125deg, #ec4899 0%, #f43f5e 45%, #fb923c 100%);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    body[data-theme="blossom"] {
+      --header-grad: linear-gradient(125deg, #ec4899 0%, #f43f5e 45%, #fb923c 100%);
+      --accent: #f43f5e;
+      --accent-soft: #ffe4e6;
+    }
+    body[data-theme="midnight"] {
+      --header-grad: linear-gradient(125deg, #312e81 0%, #6d28d9 50%, #db2777 100%);
+      --accent: #7c3aed;
+      --accent-soft: #ede9fe;
+    }
+    body[data-theme="ocean"] {
+      --header-grad: linear-gradient(125deg, #0369a1 0%, #0284c7 48%, #14b8a6 100%);
+      --accent: #0284c7;
+      --accent-soft: #e0f2fe;
+    }
+    body[data-theme="mint"] {
+      --header-grad: linear-gradient(125deg, #047857 0%, #10b981 52%, #84cc16 100%);
+      --accent: #059669;
+      --accent-soft: #d1fae5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+
+    button, input, select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Animasi */
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.55); }
+      70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+    }
+    .pulse-ring {
+      animation: pulseRing 2s infinite;
+    }
+
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.92) translateY(14px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-pop {
+      animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Overlays & Modals */
+    .overlay-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .login-body {
+      padding: 28px;
+    }
+
+    .lang-pill {
+      display: inline-flex;
+      background: rgba(15, 23, 42, 0.08);
+      padding: 4px;
+      border-radius: 14px;
+      gap: 4px;
+    }
+    .header-top .lang-pill {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+    .lang-btn {
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #64748b;
+      transition: all 0.2s;
+    }
+    .header-top .lang-btn {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .lang-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Grid Pilihan Anggota Login */
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .member-choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 2px solid var(--border-color);
+      background: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+      transition: all 0.18s;
+      text-align: left;
+    }
+    .member-choice:hover {
+      border-color: var(--accent);
+      background: #fff1f2;
+    }
+    .member-choice.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.15);
+    }
+
+    .avatar-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .av-Ochi { background: #f43f5e; }
+    .av-Atifa { background: #0ea5e9; }
+    .av-Angel { background: #f59e0b; }
+    .av-Amy { background: #10b981; }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .input-box {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-color);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-box:focus {
+      border-color: var(--accent);
+    }
+
+    .wa-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .wa-prefix {
+      position: absolute;
+      left: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+    .wa-input-wrap .input-box {
+      padding-left: 48px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: var(--header-grad);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(244, 63, 94, 0.28);
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    /* Welcome Modal */
+    .welcome-hero {
+      background: var(--header-grad);
+      color: #ffffff;
+      padding: 32px 24px 28px;
+      text-align: center;
+      position: relative;
+    }
+    .welcome-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .welcome-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-top: 8px;
+    }
+
+    /* Floating Toast Container */
+    .toast-stack {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 390px;
+      width: calc(100vw - 32px);
+      pointer-events: none;
+    }
+    .toast-item {
+      pointer-events: auto;
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid #f43f5e;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.35);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    /* Header Utama */
+    .main-header {
+      background: var(--header-grad);
+      color: #ffffff;
+      padding: 20px 16px 0;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.12);
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .glass-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      padding: 7px 13px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .glass-pill:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .bell-btn {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bell-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #fbbf24;
+      color: #0f172a;
+      font-size: 10px;
+      font-weight: 900;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+    }
+    .members-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .member-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 4px 11px 4px 5px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .member-chip .mini-av {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-swatches {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .swatch-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      transition: transform 0.15s;
+    }
+    .swatch-btn.active {
+      border-color: #ffffff;
+      transform: scale(1.2);
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.25);
+    }
+
+    /* Navigasi Tab */
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 12px 0;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border-radius: 15px;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+    .tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Mandatory Anti-DND Bar */
+    .mandatory-bar {
+      background: #fffbeb;
+      border-bottom: 1px solid #fde68a;
+      padding: 10px 16px;
+    }
+    .mandatory-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+    }
+    .locked-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .btn-dark-sm {
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 13px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-dark-sm:hover {
+      background: #1e293b;
+    }
+
+    /* Konten Utama & Kartu */
+    main {
+      flex: 1;
+      padding: 24px 16px 40px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .grid-2-1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .grid-2-1 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-value {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin: 6px 0 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .debt-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .debt-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .total-banner {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* Form Grid */
+    .form-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 768px) {
+      .form-row-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn-action {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      transition: opacity 0.15s;
+    }
+    .btn-action:hover {
+      opacity: 0.92;
+    }
+
+    /* Tabel Responsif */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      padding: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .badge-paid {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .badge-unpaid {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .badge-info {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 16px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body data-theme="blossom">
+
+  <!-- ==================== 1. LOGIN MODAL ==================== -->
+  <div id="loginModal" class="overlay-backdrop">
+    <div class="modal-card modal-pop">
+      <div class="login-body">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:46px; height:46px; border-radius:16px; background:var(--header-grad); color:#fff; display:flex; align-items:center; justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <h2 style="font-size:19px; font-weight:900;">House Mate Girls</h2>
+              <p style="font-size:12px; color:var(--text-sub); font-weight:600;">4 girls · 1 home · zero money drama</p>
+            </div>
+          </div>
+
+          <div class="lang-pill" role="group" aria-label="Language Toggle">
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+            <button type="button" class="lang-btn active" data-lang="id">ID</button>
+          </div>
+        </div>
+
+        <p id="loginSubtitle" style="font-size:13px; color:var(--text-sub); margin-bottom:18px;">
+          Masuk dengan <strong>Nama Anggota</strong> dan <strong>Nomor WhatsApp</strong> agar tagihan dan notifikasi jendela HP/PC langsung aktif otomatis.
+        </p>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label id="lblChooseMember" class="form-label">Pilih Profil Kamu</label>
+            <div class="member-grid">
+              <button type="button" class="member-choice" data-member="Ochi">
+                <span class="avatar-dot av-Ochi">O</span>
+                <span>Ochi</span>
+              </button>
+              <button type="button" class="member-choice" data-member="Atifa">
+                <span class="avatar-dot av-Atifa">A</span>
+                <span>Atifa</span>
+              </button>
+              <button type="button" class="member-choice" data-member="Angel">
+                <span class="avatar-dot av-Angel">A</span>
+                <span>Angel</span>
+              </button>
+              <button type="button" class="member-choice" data-member="Amy">
+                <span class="avatar-dot av-Amy">A</span>
+                <span>Amy</span>
+              </button>
+            </div>
+            <input type="hidden" id="selectedMemberInput" value="" />
+          </div>
+
+          <div class="form-group">
+            <label id="lblWaNumber" for="waNumberInput" class="form-label">Nomor WhatsApp Aktif</label>
+            <div class="wa-input-wrap">
+              <span class="wa-prefix">+62</span>
+              <input type="tel" id="waNumberInput" class="input-box" placeholder="81234567890" required />
+            </div>
+          </div>
+
+          <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:16px; padding:12px; margin-bottom:18px; display:flex; gap:10px; align-items:flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" style="flex-shrink:0; margin-top:2px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <p id="loginNotifInfo" style="font-size:12px; color:#92400e;">
+              <strong>Notifikasi Jendela Wajib Aktif (Anti-DND):</strong> Fitur senyap/mute dinonaktifkan agar pengingat tagihan & pembayaran selalu tampil di layar perangkatmu.
+            </p>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span id="btnLoginLabel">Masuk & Aktifkan Notifikasi</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. ENGLISH WELCOME MODAL ==================== -->
+  <div id="welcomeModal" class="overlay-backdrop hidden">
+    <div class="modal-card modal-pop">
+      <div class="welcome-hero">
+        <div class="welcome-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+        </div>
+        <span style="display:inline-block; background:rgba(255,255,255,0.22); padding:4px 12px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;">
+          Shared Home Portal
+        </span>
+        <h2 id="welcomeHeadingText" class="welcome-title">WELCOME OCHI, TO HOUSE MATE GIRLS!</h2>
+      </div>
+      <div style="padding:24px; text-align:center;">
+        <p style="font-size:14px; color:var(--text-sub); font-weight:500; margin-bottom:16px;">
+          4 girls · 1 home · zero money drama — Everything we share is transparent, fair, and easy to track together.
+        </p>
+        <div style="background:#fff1f2; border:1px solid #fecdd3; border-radius:16px; padding:14px; text-align:left; margin-bottom:20px;">
+          <div style="font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:0.06em; color:#e11d48; margin-bottom:4px;">
+            PRIORITY WINDOW ALERT · MANDATORY ON / ANTI-DND
+          </div>
+          <p id="welcomeDebtSummaryEn" style="font-size:13px; font-weight:800; color:#0f172a;">
+            Checking your current shared bill status...
+          </p>
+        </div>
+        <button type="button" id="closeWelcomeBtn" class="btn-primary" style="background:#0f172a; box-shadow:0 8px 20px rgba(15,23,42,0.22);">
+          <span>ENTER DASHBOARD</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FLOATING WINDOW TOASTS ==================== -->
+  <div id="toastStack" class="toast-stack"></div>
+
+  <!-- ==================== MAIN HEADER ==================== -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-top">
+        <div class="brand-box">
+          <div class="brand-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div>
+            <h1 style="font-size:21px; font-weight:900; letter-spacing:-0.02em;">House Mate Girls</h1>
+            <p style="font-size:12px; opacity:0.92; font-weight:600;">4 girls · 1 home · zero money drama</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Logged-in User Pill -->
+          <button type="button" id="switchUserBtn" class="glass-pill" title="Switch User / Logout">
+            <span id="headerUserAvatar" class="avatar-dot av-Ochi" style="width:24px; height:24px; font-size:11px;">?</span>
+            <div style="text-align:left; line-height:1.15;">
+              <div id="headerUserName" style="font-weight:800;">Belum Login</div>
+              <div id="headerUserWa" style="font-size:10px; opacity:0.85;">-</div>
+            </div>
+          </button>
+
+          <!-- Notification Bell -->
+          <button type="button" id="headerBellBtn" class="bell-btn pulse-ring" title="Test Window Alert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span id="headerBellCount" class="bell-badge">0</span>
+          </button>
+
+          <!-- Bilingual Switch (EN | ID) - No Excel Button -->
+          <div class="lang-pill" role="group" aria-label="Language Toggle">
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+            <button type="button" class="lang-btn active" data-lang="id">ID</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member Chips + Theme Swatches + Lease Badge -->
+      <div class="header-meta">
+        <div class="members-row">
+          <span class="member-chip"><span class="mini-av av-Ochi">O</span> Ochi</span>
+          <span class="member-chip"><span class="mini-av av-Atifa">A</span> Atifa</span>
+          <span class="member-chip"><span class="mini-av av-Angel">A</span> Angel</span>
+          <span class="member-chip"><span class="mini-av av-Amy">A</span> Amy</span>
+        </div>
+
+        <div class="theme-swatches">
+          <button type="button" class="swatch-btn active" data-theme="blossom" style="background:linear-gradient(135deg,#ec4899,#fb923c);" title="Blossom"></button>
+          <button type="button" class="swatch-btn" data-theme="midnight" style="background:linear-gradient(135deg,#312e81,#db2777);" title="Midnight"></button>
+          <button type="button" class="swatch-btn" data-theme="ocean" style="background:linear-gradient(135deg,#0369a1,#14b8a6);" title="Ocean"></button>
+          <button type="button" class="swatch-btn" data-theme="mint" style="background:linear-gradient(135deg,#047857,#84cc16);" title="Mint"></button>
+          <span id="themeNameLabel" style="font-weight:800;">Blossom</span>
+        </div>
+
+        <div id="leaseBadgeText" style="background:rgba(255,255,255,0.16); padding:5px 12px; border-radius:12px; font-weight:700;">
+          Kontrak 1 Tahun: September 2026 – Agustus 2027
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" id="navTabs">
+        <button type="button" class="tab-btn active" data-tab="dashboard" id="tabBtn-dashboard">Dashboard</button>
+        <button type="button" class="tab-btn" data-tab="alerts" id="tabBtn-alerts">Notifikasi</button>
+        <button type="button" class="tab-btn" data-tab="garbage" id="tabBtn-garbage">Sampah</button>
+        <button type="button" class="tab-btn" data-tab="water" id="tabBtn-water">Air PAM</button>
+        <button type="button" class="tab-btn" data-tab="gallon" id="tabBtn-gallon">Galon (3 Galon)</button>
+        <button type="button" class="tab-btn" data-tab="gas" id="tabBtn-gas">Gas LPG</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MANDATORY ALWAYS-ON / ANTI-DND BAR ==================== -->
+  <div class="mandatory-bar">
+    <div class="container mandatory-inner">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+        <span id="lockedStatusBadge" class="locked-pill">MANDATORY ON · ANTI-DND LOCKED</span>
+        <span id="topPersonalAlertText" style="font-weight:700; color:#78350f;">
+          Memeriksa status tagihan kontrak rumah...
+        </span>
+      </div>
+      <button type="button" id="grantWindowNotifBtn" class="btn-dark-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.3"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span id="grantWindowNotifLabel">Aktifkan Notifikasi Jendela</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="container">
+
+    <!-- TAB 1: DASHBOARD -->
+    <section id="panel-dashboard" class="tab-panel">
+      <div class="grid-4">
+        <div class="card">
+          <div id="statLblGarbage" style="font-size:11px; font-weight:800; color:var(--text-light); text-transform:uppercase;">Sampah (12 Bulan)</div>
+          <div id="statValGarbage" class="stat-value">Rp 240.000</div>
+          <div id="statSubGarbage" style="font-size:12px; color:var(--text-sub);">Rp 20.000/bln · Bergantian</div>
+        </div>
+        <div class="card">
+          <div id="statLblWater" style="font-size:11px; font-weight:800; color:var(--text-light); text-transform:uppercase;">Air PAM</div>
+          <div id="statValWater" class="stat-value">Rp 81.896</div>
+          <div id="statSubWater" style="font-size:12px; color:var(--text-sub);">2 bulan · Bagi rata 4 orang</div>
+        </div>
+        <div class="card">
+          <div id="statLblGallon" style="font-size:11px; font-weight:800; color:var(--text-light); text-transform:uppercase;">Galon Isi Ulang</div>
+          <div id="statValGallon" class="stat-value">Rp 0</div>
+          <div id="statSubGallon" style="font-size:12px; color:var(--text-sub);">Rp 6.000/galon · Max 3 galon</div>
+        </div>
+        <div class="card">
+          <div id="statLblGas" style="font-size:11px; font-weight:800; color:var(--text-light); text-transform:uppercase;">Gas LPG</div>
+          <div id="statValGas" class="stat-value">Rp 0</div>
+          <div id="statSubGas" style="font-size:12px; color:var(--text-sub);">Belum ada isi ulang</div>
+        </div>
+      </div>
+
+      <div class="grid-2-1">
+        <div class="card">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+            <div>
+              <h2 id="dashSettlementTitle" style="font-size:18px; font-weight:900;">Rekap Tagihan Antar Penghuni</h2>
+              <p id="dashSettlementSub" style="font-size:12px; color:var(--text-sub);">Rincian pembayaran Air PAM yang harus diganti ke Ochi</p>
+            </div>
+            <button type="button" id="dashTriggerAlertBtn" style="background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:800; padding:8px 14px; border-radius:12px;">
+              + Kirim Pengingat Layar
+            </button>
+          </div>
+
+          <div id="debtCardsContainer" class="debt-cards-grid"></div>
+
+          <div class="total-banner">
+            <span id="dashGrandOwedLabel" style="font-size:12px; font-weight:700; color:#cbd5e1;">TOTAL KESELURUHAN YANG HARUS DIBAYAR KE OCHI:</span>
+            <span id="dashGrandOwedVal" style="font-size:20px; font-weight:900; color:#fbbf24;">Rp 61.419</span>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; flex-direction:column; gap:12px;">
+          <h2 id="dashRotationTitle" style="font-size:18px; font-weight:900;">Jadwal Giliran Aktif</h2>
+          <p id="dashRotationSub" style="font-size:12px; color:var(--text-sub);">Urutan: <strong>Ochi → Atifa → Angel → Amy</strong></p>
+
+          <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:16px; padding:14px;">
+            <div id="rotGarbageLbl" style="font-size:11px; font-weight:800; color:#047857; text-transform:uppercase;">Giliran Sampah Berikutnya</div>
+            <div id="rotGarbageVal" style="font-size:16px; font-weight:900; margin-top:2px;">Ochi (September 2026)</div>
+          </div>
+
+          <div style="background:#eef2ff; border:1px solid #c7d2fe; border-radius:16px; padding:14px;">
+            <div id="rotGallonLbl" style="font-size:11px; font-weight:800; color:#4338ca; text-transform:uppercase;">Giliran Galon Berikutnya</div>
+            <div id="rotGallonVal" style="font-size:16px; font-weight:900; margin-top:2px;">Ochi</div>
+          </div>
+
+          <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:16px; padding:14px;">
+            <div id="rotGasLbl" style="font-size:11px; font-weight:800; color:#c2410c; text-transform:uppercase;">Giliran Gas LPG Berikutnya</div>
+            <div id="rotGasVal" style="font-size:16px; font-weight:900; margin-top:2px;">Ochi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ALERTS / NOTIFICATIONS -->
+    <section id="panel-alerts" class="tab-panel hidden">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px;">
+          <div>
+            <h2 id="alertsPanelTitle" style="font-size:18px; font-weight:900;">Notifikasi Jendela Perangkat (Mandatory On · Anti-DND)</h2>
+            <p id="alertsPanelDesc" style="font-size:13px; color:var(--text-sub); margin-top:4px;">
+              Notifikasi muncul langsung di jendela layar HP/PC (bukan WhatsApp). Tombol senyap/DND dihapus permanen agar semua penghuni selalu ingat tagihannya.
+            </p>
+          </div>
+          <span class="locked-pill">MUTE &amp; DND DISABLED</span>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; padding:14px; background:var(--bg-muted); border-radius:16px; align-items:center; justify-content:space-between;">
+          <div style="font-size:12px; font-weight:700;">
+            <span id="permStatusPrefix">Status Izin Browser:</span>
+            <span id="permStatusValue" style="color:var(--accent);">Memeriksa...</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <button type="button" id="btnReqPerm" class="btn-dark-sm">Izinkan Notifikasi Jendela</button>
+            <button type="button" id="btnTestWaterAlert" class="btn-dark-sm" style="background:#e11d48;">Tes Notif Air PAM</button>
+            <button type="button" id="btnTestGallonAlert" class="btn-dark-sm" style="background:#4f46e5;">Tes Notif Galon</button>
+          </div>
+        </div>
+
+        <h3 id="alertsLogHeading" style="font-size:13px; font-weight:800; text-transform:uppercase; color:var(--text-sub); margin-bottom:10px;">
+          Riwayat Notifikasi &amp; Pengingat Aktif
+        </h3>
+        <div id="alertsLogList" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: GARBAGE (SAMPAH) -->
+    <section id="panel-garbage" class="tab-panel hidden">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <h2 id="garbagePanelTitle" style="font-size:18px; font-weight:900;">Iuran Sampah Bulanan (Rp 20.000 / Bulan)</h2>
+            <p id="garbagePanelSub" style="font-size:12px; color:var(--text-sub);">Giliran bergantian selama 1 tahun: <strong>Ochi → Atifa → Angel → Amy</strong></p>
+          </div>
+          <span id="garbageSummaryPill" class="badge badge-paid" style="font-size:12px; padding:6px 14px;">Total 1 Tahun: Rp 240.000</span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th id="thGMonth">Bulan</th>
+                <th id="thGPeriod">Periode</th>
+                <th id="thGPayer">Giliran Bayar</th>
+                <th id="thGAmount">Nominal</th>
+                <th id="thGStatus">Status</th>
+                <th id="thGAction" style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="garbageTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: WATER PAM (AIR PAM) -->
+    <section id="panel-water" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <h2 id="waterFormTitle" style="font-size:18px; font-weight:900;">Catat Tagihan Air PAM Baru</h2>
+        <p id="waterFormSub" style="font-size:12px; color:var(--text-sub);">Total pembayaran otomatis dibagi 4 orang (<strong>Total ÷ 4</strong>) dan memunculkan notifikasi tagihan.</p>
+
+        <form id="waterForm" class="form-row-4">
+          <div>
+            <label id="lblWDate" class="form-label">Tanggal Bayar</label>
+            <input type="date" id="wDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblWTotal" class="form-label">Total Tagihan (Rp)</label>
+            <input type="number" id="wTotalInput" class="input-box" placeholder="55385" min="1" required />
+          </div>
+          <div>
+            <label id="lblWPayer" class="form-label">Yang Bayar Duluan</label>
+            <select id="wPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnWSubmit" class="btn-action" style="background:#0284c7;">+ Simpan &amp; Bagi 4</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;">
+          <div>
+            <h3 id="waterListTitle" style="font-size:17px; font-weight:900;">Rincian Tagihan Air PAM &amp; Checklist Pelunasan</h3>
+            <p id="waterListSub" style="font-size:12px; color:var(--text-sub);">Centang jika masing-masing anggota sudah membayar bagiannya.</p>
+          </div>
+          <span id="waterTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 14px;">Total Air: Rp 81.896</span>
+        </div>
+        <div id="waterCardsList" style="display:flex; flex-direction:column; gap:14px;"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GALLON (GALON 3 BOTOL) -->
+    <section id="panel-gallon" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <h2 id="gallonFormTitle" style="font-size:18px; font-weight:900;">Catat Isi Ulang Galon (Rp 6.000 / Galon)</h2>
+            <p id="gallonFormSub" style="font-size:12px; color:var(--text-sub);">Di rumah tersedia <strong>3 galon</strong> (bisa diisi 1, 2, atau 3 galon). Bergantian: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
+          </div>
+          <span class="badge badge-info" style="font-size:12px; padding:6px 12px;">
+            <span id="gallonTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gallonNextTurnBadge">Ochi</strong>
+          </span>
+        </div>
+
+        <form id="gallonForm" class="form-row-4">
+          <div>
+            <label id="lblGlDate" class="form-label">Tanggal Isi</label>
+            <input type="date" id="glDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblGlPayer" class="form-label">Pembayar (Giliran)</label>
+            <select id="glPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div>
+            <label id="lblGlQty" class="form-label">Jumlah Galon</label>
+            <select id="glQtyInput" class="input-box">
+              <option value="1">1 Galon / Gallon (Rp 6.000)</option>
+              <option value="2" selected>2 Galon / Gallons (Rp 12.000)</option>
+              <option value="3">3 Galon / Gallons (Rp 18.000)</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnGlSubmit" class="btn-action" style="background:#4f46e5;">+ Simpan &amp; Kirim Notif</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h3 id="gallonTableTitle" style="font-size:17px; font-weight:900;">Riwayat Isi Ulang Galon</h3>
+          <span id="gallonTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 12px;">Total: Rp 0</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th id="thGlDate">Tanggal</th>
+                <th id="thGlPayer">Pembayar</th>
+                <th id="thGlQty">Jumlah</th>
+                <th id="thGlTotal">Total</th>
+                <th id="thGlDel" style="text-align:right;">Hapus</th>
+              </tr>
+            </thead>
+            <tbody id="gallonTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: LPG GAS (GAS LPG) -->
+    <section id="panel-gas" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <h2 id="gasFormTitle" style="font-size:18px; font-weight:900;">Pengeluaran Gas LPG (Giliran Bergantian)</h2>
+            <p id="gasFormSub" style="font-size:12px; color:var(--text-sub);">Saat ini belum ada isi ulang gas. Jika nanti sudah beli, masukkan harga dan pembayar sesuai urutan: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
+          </div>
+          <span class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">
+            <span id="gasTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gasNextTurnBadge">Ochi</strong>
+          </span>
+        </div>
+
+        <form id="gasForm" class="form-row-4">
+          <div>
+            <label id="lblGsDate" class="form-label">Tanggal Beli Gas</label>
+            <input type="date" id="gsDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblGsPayer" class="form-label">Pembayar (Giliran)</label>
+            <select id="gsPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div>
+            <label id="lblGsPrice" class="form-label">Harga Gas LPG (Rp)</label>
+            <input type="number" id="gsPriceInput" class="input-box" placeholder="22000" min="1" required />
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnGsSubmit" class="btn-action" style="background:#ea580c;">+ Catat Pembelian Gas</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h3 id="gasTableTitle" style="font-size:17px; font-weight:900;">Tabel Pengeluaran Gas LPG</h3>
+          <span id="gasTotalBadge" class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">Total: Rp 0</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th id="thGsTurn">Giliran</th>
+                <th id="thGsDate">Tanggal</th>
+                <th id="thGsPayer">Pembayar</th>
+                <th id="thGsPrice">Nominal Harga</th>
+                <th id="thGsStatus">Status</th>
+                <th id="thGsAction" style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="gasTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footerNote">
+    House Mate Girls · Kontrak Bersama September 2026 – Agustus 2027 · Ochi, Atifa, Angel, Amy
+  </footer>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "house_mate_girls_v4_data";
+      const MEMBERS = ["Ochi", "Atifa", "Angel", "Amy"];
+      const MONTHS_ID = [
+        "September 2026", "Oktober 2026", "November 2026", "Desember 2026",
+        "Januari 2027", "Februari 2027", "Maret 2027", "April 2027",
+        "Mei 2027", "Juni 2027", "Juli 2027", "Agustus 2027"
+      ];
+      const MONTHS_EN = [
+        "September 2026", "October 2026", "November 2026", "December 2026",
+        "January 2027", "February 2027", "March 2027", "April 2027",
+        "May 2027", "June 2027", "July 2027", "August 2027"
+      ];
+
+      // Safe localStorage wrapper (tahan terhadap mode file:// atau private browsing)
+      function loadStoredState() {
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY);
+          if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return null;
+      }
+
+      function saveStoredState(stateObj) {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stateObj));
+        } catch (e) {}
+      }
+
+      function createDefaultState() {
+        return {
+          lang: "id",
+          theme: "blossom",
+          currentUser: null,
+          garbage: MONTHS_ID.map((m, idx) => ({
+            id: "g-" + (idx + 1),
+            monthIndex: idx + 1,
+            payer: MEMBERS[idx % 4],
+            amount: 20000,
+            paid: false,
+            paidDate: ""
+          })),
+          water: [
+            {
+              id: "w-1",
+              date: "2026-10-07",
+              displayDate: "07-10-2026",
+              totalAmount: 26511,
+              sharePerPerson: 6627,
+              payer: "Ochi",
+              settledBy: { Ochi: true, Atifa: false, Angel: false, Amy: false }
+            },
+            {
+              id: "w-2",
+              date: "2026-11-20",
+              displayDate: "20-11-2026",
+              totalAmount: 55385,
+              sharePerPerson: 13846,
+              payer: "Ochi",
+              settledBy: { Ochi: true, Atifa: false, Angel: false, Amy: false }
+            }
+          ],
+          gallons: [],
+          gas: [],
+          alerts: [
+            {
+              id: "al-init-1",
+              time: "20-11-2026",
+              titleId: "TAGIHAN AIR PAM BELUM DIBAYAR",
+              titleEn: "UNPAID WATER BILL REMINDER",
+              msgId: "HALLO ATIFA, ANGEL, AMY ANDA PERLU MEMBAYAR UANG AIR KEPADA OCHI SEBESAR Rp 20.473 (AIR 1: Rp 6.627 + AIR 2: Rp 13.846).",
+              msgEn: "HELLO ATIFA, ANGEL, AMY YOU NEED TO PAY WATER BILL TO OCHI AMOUNTING TO Rp 20.473 (WATER 1: Rp 6.627 + WATER 2: Rp 13.846)."
+            }
+          ]
+        };
+      }
+
+      let state = loadStoredState() || createDefaultState();
+
+      // Kamus UI Dwibahasa
+      const TEXT = {
+        id: {
+          loginSub: "Masuk dengan <strong>Nama Anggota</strong> dan <strong>Nomor WhatsApp</strong> agar tagihan dan notifikasi jendela HP/PC langsung aktif otomatis.",
+          lblChooseMember: "Pilih Profil Kamu",
+          lblWaNumber: "Nomor WhatsApp Aktif",
+          loginNotifInfo: "<strong>Notifikasi Jendela Wajib Aktif (Anti-DND):</strong> Fitur senyap/mute dinonaktifkan agar pengingat tagihan &amp; pembayaran selalu tampil di layar perangkatmu.",
+          btnLoginLabel: "Masuk & Aktifkan Notifikasi",
+          notLoggedIn: "Belum Login",
+          leaseBadge: "Kontrak 1 Tahun: September 2026 – Agustus 2027",
+          tabDashboard: "Dashboard",
+          tabAlerts: "Notifikasi",
+          tabGarbage: "Sampah",
+          tabWater: "Air PAM",
+          tabGallon: "Galon (3 Galon)",
+          tabGas: "Gas LPG",
+          grantNotif: "Aktifkan Notifikasi Jendela",
+          notifGranted: "Notif Jendela Aktif (Anti-DND) ✓",
+          statLblGarbage: "Sampah (12 Bulan)",
+          statLblWater: "Air PAM",
+          statLblGallon: "Galon Isi Ulang",
+          statLblGas: "Gas LPG",
+          dashSettlementTitle: "Rekap Tagihan Antar Penghuni",
+          dashSettlementSub: "Rincian pembayaran Air PAM yang harus diganti ke Ochi",
+          dashTriggerAlertBtn: "+ Kirim Pengingat Layar",
+          dashGrandOwedLabel: "TOTAL KESELURUHAN YANG HARUS DIBAYAR KE OCHI:",
+          dashRotationTitle: "Jadwal Giliran Aktif",
+          dashRotationSub: "Urutan: <strong>Ochi → Atifa → Angel → Amy</strong>",
+          rotGarbageLbl: "Giliran Sampah Berikutnya",
+          rotGallonLbl: "Giliran Galon Berikutnya",
+          rotGasLbl: "Giliran Gas LPG Berikutnya",
+          paidBadge: "LUNAS",
+          unpaidBadge: "BELUM BAYAR",
+          overallLbl: "KESELURUHAN:",
+          alertsPanelTitle: "Notifikasi Jendela Perangkat (Mandatory On · Anti-DND)",
+          alertsPanelDesc: "Notifikasi muncul langsung di jendela layar HP/PC (bukan WhatsApp). Tombol senyap/DND dihapus permanen agar semua penghuni selalu ingat tagihannya.",
+          permStatusPrefix: "Status Izin Browser:",
+          btnReqPerm: "Izinkan Notifikasi Jendela",
+          btnTestWaterAlert: "Tes Notif Air PAM",
+          btnTestGallonAlert: "Tes Notif Galon",
+          alertsLogHeading: "Riwayat Notifikasi & Pengingat Aktif",
+          garbagePanelTitle: "Iuran Sampah Bulanan (Rp 20.000 / Bulan)",
+          garbagePanelSub: "Giliran bergantian selama 1 tahun: <strong>Ochi → Atifa → Angel → Amy</strong>",
+          garbageSummaryPill: "Total 1 Tahun: Rp 240.000",
+          thGMonth: "Bulan",
+          thGPeriod: "Periode",
+          thGPayer: "Giliran Bayar",
+          thGAmount: "Nominal",
+          thGStatus: "Status",
+          thGAction: "Aksi",
+          markPaid: "Tandai Lunas",
+          undoPaid: "Batalkan",
+          waterFormTitle: "Catat Tagihan Air PAM Baru",
+          waterFormSub: "Total pembayaran otomatis dibagi 4 orang (<strong>Total ÷ 4</strong>) dan memunculkan notifikasi tagihan.",
+          lblWDate: "Tanggal Bayar",
+          lblWTotal: "Total Tagihan (Rp)",
+          lblWPayer: "Yang Bayar Duluan",
+          btnWSubmit: "+ Simpan & Bagi 4",
+          waterListTitle: "Rincian Tagihan Air PAM & Checklist Pelunasan",
+          waterListSub: "Centang jika masing-masing anggota sudah membayar bagiannya.",
+          gallonFormTitle: "Catat Isi Ulang Galon (Rp 6.000 / Galon)",
+          gallonFormSub: "Di rumah tersedia <strong>3 galon</strong> (bisa diisi 1, 2, atau 3 galon). Bergantian: <strong>Ochi → Atifa → Angel → Amy</strong>.",
+          gallonTurnPrefix: "Giliran Berikutnya:",
+          lblGlDate: "Tanggal Isi",
+          lblGlPayer: "Pembayar (Giliran)",
+          lblGlQty: "Jumlah Galon",
+          btnGlSubmit: "+ Simpan & Kirim Notif",
+          gallonTableTitle: "Riwayat Isi Ulang Galon",
+          thGlDate: "Tanggal",
+          thGlPayer: "Pembayar",
+          thGlQty: "Jumlah",
+          thGlTotal: "Total",
+          thGlDel: "Hapus",
+          emptyGallon: "Belum ada catatan isi ulang galon. Silakan isi form di atas saat membeli galon.",
+          gasFormTitle: "Pengeluaran Gas LPG (Giliran Bergantian)",
+          gasFormSub: "Saat ini belum ada isi ulang gas. Jika nanti sudah beli, masukkan harga dan pembayar sesuai urutan: <strong>Ochi → Atifa → Angel → Amy</strong>.",
+          gasTurnPrefix: "Giliran Berikutnya:",
+          lblGsDate: "Tanggal Beli Gas",
+          lblGsPayer: "Pembayar (Giliran)",
+          lblGsPrice: "Harga Gas LPG (Rp)",
+          btnGsSubmit: "+ Catat Pembelian Gas",
+          gasTableTitle: "Tabel Pengeluaran Gas LPG",
+          thGsTurn: "Giliran",
+          thGsDate: "Tanggal",
+          thGsPayer: "Pembayar",
+          thGsPrice: "Nominal Harga",
+          thGsStatus: "Status",
+          thGsAction: "Aksi",
+          emptyGas: "Belum ada pembelian Gas LPG. Tabel siap diisi jika nanti sudah isi ulang gas.",
+          footerNote: "House Mate Girls · Kontrak Bersama September 2026 – Agustus 2027 · Ochi, Atifa, Angel, Amy"
+        },
+        en: {
+          loginSub: "Sign in with your <strong>Member Name</strong> and <strong>WhatsApp Number</strong> so shared bills and window notifications activate automatically.",
+          lblChooseMember: "Choose Your Profile",
+          lblWaNumber: "Active WhatsApp Number",
+          loginNotifInfo: "<strong>Mandatory Window Alerts (Anti-DND):</strong> Mute/snooze is permanently disabled so bill reminders and payment updates always pop up on your screen.",
+          btnLoginLabel: "Sign In & Enable Alerts",
+          notLoggedIn: "Not Signed In",
+          leaseBadge: "1-Year Lease: September 2026 – August 2027",
+          tabDashboard: "Dashboard",
+          tabAlerts: "Alerts",
+          tabGarbage: "Garbage",
+          tabWater: "Water PAM",
+          tabGallon: "Gallon (3 Bottles)",
+          tabGas: "LPG Gas",
+          grantNotif: "Enable Window Alerts",
+          notifGranted: "Window Alerts Active (Anti-DND) ✓",
+          statLblGarbage: "Garbage (12 Mos)",
+          statLblWater: "Water PAM",
+          statLblGallon: "Refill Gallons",
+          statLblGas: "LPG Gas",
+          dashSettlementTitle: "Housemate Bill Settlement",
+          dashSettlementSub: "Breakdown of Water PAM shares owed to Ochi",
+          dashTriggerAlertBtn: "+ Send Screen Reminder",
+          dashGrandOwedLabel: "GRAND TOTAL OWED TO OCHI:",
+          dashRotationTitle: "Active Rotation Schedule",
+          dashRotationSub: "Order: <strong>Ochi → Atifa → Angel → Amy</strong>",
+          rotGarbageLbl: "Next Garbage Turn",
+          rotGallonLbl: "Next Gallon Turn",
+          rotGasLbl: "Next LPG Gas Turn",
+          paidBadge: "PAID",
+          unpaidBadge: "UNPAID",
+          overallLbl: "TOTAL OWED:",
+          alertsPanelTitle: "Device Window Notifications (Mandatory On · Anti-DND)",
+          alertsPanelDesc: "Alerts pop up directly in your phone/PC window (not via WhatsApp). Mute and DND controls are permanently disabled so everyone remembers their share.",
+          permStatusPrefix: "Browser Permission Status:",
+          btnReqPerm: "Allow Window Alerts",
+          btnTestWaterAlert: "Test Water Alert",
+          btnTestGallonAlert: "Test Gallon Alert",
+          alertsLogHeading: "Active Reminders & Notification Log",
+          garbagePanelTitle: "Monthly Garbage Fee (Rp 20.000 / Month)",
+          garbagePanelSub: "Rotating turns over 1-year lease: <strong>Ochi → Atifa → Angel → Amy</strong>",
+          garbageSummaryPill: "1-Year Total: Rp 240.000",
+          thGMonth: "Month",
+          thGPeriod: "Period",
+          thGPayer: "Assigned Payer",
+          thGAmount: "Amount",
+          thGStatus: "Status",
+          thGAction: "Action",
+          markPaid: "Mark Paid",
+          undoPaid: "Undo",
+          waterFormTitle: "Record New Water PAM Bill",
+          waterFormSub: "Total bill is automatically divided by 4 (<strong>Total ÷ 4</strong>) and triggers screen notifications.",
+          lblWDate: "Payment Date",
+          lblWTotal: "Total Bill (Rp)",
+          lblWPayer: "Paid Upfront By",
+          btnWSubmit: "+ Save & Split by 4",
+          waterListTitle: "Water PAM Bill Breakdown & Settlement Checklist",
+          waterListSub: "Check each housemate once they have reimbursed their share.",
+          gallonFormTitle: "Record Gallon Refill (Rp 6.000 / Gallon)",
+          gallonFormSub: "We have <strong>3 gallons</strong> at home (1, 2, or 3 refilled). Rotation: <strong>Ochi → Atifa → Angel → Amy</strong>.",
+          gallonTurnPrefix: "Next Turn:",
+          lblGlDate: "Refill Date",
+          lblGlPayer: "Payer (Rotation)",
+          lblGlQty: "Quantity",
+          btnGlSubmit: "+ Save & Send Alert",
+          gallonTableTitle: "Gallon Refill History",
+          thGlDate: "Date",
+          thGlPayer: "Payer",
+          thGlQty: "Quantity",
+          thGlTotal: "Total",
+          thGlDel: "Delete",
+          emptyGallon: "No gallon refills recorded yet. Use the form above whenever gallons are refilled.",
+          gasFormTitle: "LPG Gas Expenses (Rotating Turns)",
+          gasFormSub: "No gas refills yet. Once bought, enter price and payer in order: <strong>Ochi → Atifa → Angel → Amy</strong>.",
+          gasTurnPrefix: "Next Turn:",
+          lblGsDate: "Purchase Date",
+          lblGsPayer: "Payer (Rotation)",
+          lblGsPrice: "LPG Gas Price (Rp)",
+          btnGsSubmit: "+ Record Gas Purchase",
+          gasTableTitle: "LPG Gas Expense Table",
+          thGsTurn: "Turn",
+          thGsDate: "Date",
+          thGsPayer: "Payer",
+          thGsPrice: "Price",
+          thGsStatus: "Status",
+          thGsAction: "Action",
+          emptyGas: "No LPG gas purchases yet. This table is ready for your first refill.",
+          footerNote: "House Mate Girls · Shared Lease September 2026 – August 2027 · Ochi, Atifa, Angel, Amy"
+        }
+      };
+
+      function tr(key) {
+        return (TEXT[state.lang] && TEXT[state.lang][key]) || TEXT.id[key] || key;
+      }
+
+      function formatRp(num) {
+        return "Rp " + Math.round(Number(num) || 0).toLocaleString("id-ID");
+      }
+
+      function formatDateDisplay(isoStr) {
+        if (!isoStr || !isoStr.includes("-")) return isoStr || "-";
+        const p = isoStr.split("-");
+        return p[2] + "-" + p[1] + "-" + p[0];
+      }
+
+      // Gentle Web Audio API Chime (zero external audio file dependencies)
+      function playBellChime() {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          const ctx = new AudioCtx();
+          const now = ctx.currentTime;
+          [587.33, 880, 1174.66].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(freq, now + idx * 0.11);
+            gain.gain.setValueAtTime(0.18, now + idx * 0.11);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.45);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + idx * 0.11);
+            osc.stop(now + idx * 0.11 + 0.48);
+          });
+        } catch (e) {}
+      }
+
+      function triggerWindowNotification(title, message) {
+        playBellChime();
+        if (navigator.vibrate) {
+          try { navigator.vibrate([300, 150, 300]); } catch (e) {}
+        }
+
+        // Native OS / Browser Window Notification (High Priority / Anti-DND)
+        if ("Notification" in window && Notification.permission === "granted") {
+          try {
+            new Notification(title, {
+              body: message,
+              requireInteraction: true,
+              silent: false,
+              vibrate: [300, 150, 300],
+              tag: "hmg-alert-" + Date.now()
+            });
+          } catch (e) {}
+        }
+
+        // Persistent In-App Window Toast
+        const stack = document.getElementById("toastStack");
+        const item = document.createElement("div");
+        item.className = "toast-item modal-pop";
+        item.innerHTML = `
+          <div style="width:34px; height:34px; border-radius:12px; background:rgba(244,63,94,0.22); color:#fb7185; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="font-size:10px; font-weight:900; color:#fb7185; letter-spacing:0.05em; text-transform:uppercase;">${title} · ANTI-DND</div>
+            <div style="font-size:13px; font-weight:700; margin-top:3px; line-height:1.35;">${message}</div>
+          </div>
+          <button type="button" style="background:rgba(255,255,255,0.14); color:#fff; font-size:11px; font-weight:800; padding:4px 9px; border-radius:8px;" onclick="this.parentElement.remove()">OK</button>
+        `;
+        stack.prepend(item);
+      }
+
+      function getMemberReminderMessage(memberName, langOverride) {
+        const lang = langOverride || state.lang;
+        if (!memberName) return "";
+
+        let waterOwed = 0;
+        let payerName = "Ochi";
+        state.water.forEach((w) => {
+          if (w.payer !== memberName && !w.settledBy[memberName]) {
+            waterOwed += Number(w.sharePerPerson) || 0;
+            payerName = w.payer;
+          }
+        });
+
+        const unpaidG = state.garbage.find((g) => g.payer === memberName && !g.paid);
+
+        if (waterOwed > 0) {
+          return lang === "en"
+            ? `HELLO ${memberName.toUpperCase()}, YOU NEED TO PAY THE WATER BILL TO ${payerName.toUpperCase()} AMOUNTING TO ${formatRp(waterOwed)}`
+            : `HALLO ${memberName.toUpperCase()} ANDA PERLU MEMBAYAR UANG AIR KEPADA ${payerName.toUpperCase()} SEBESAR ${formatRp(waterOwed)}`;
+        }
+        if (unpaidG) {
+          const periodName = lang === "en" ? MONTHS_EN[unpaidG.monthIndex - 1] : MONTHS_ID[unpaidG.monthIndex - 1];
+          return lang === "en"
+            ? `HELLO ${memberName.toUpperCase()}, YOUR GARBAGE FEE FOR ${periodName.toUpperCase()} (${formatRp(unpaidG.amount)}) IS UNPAID`
+            : `HALLO ${memberName.toUpperCase()} GILIRAN SAMPAH BULAN ${periodName.toUpperCase()} SEBESAR ${formatRp(unpaidG.amount)} BELUM DIBAYAR`;
+        }
+        return lang === "en"
+          ? `HELLO ${memberName.toUpperCase()}, ALL YOUR SHARED BILLS ARE CURRENTLY PAID!`
+          : `HALLO ${memberName.toUpperCase()} SEMUA TAGIHAN PATUNGAN KAMU SUDAH LUNAS!`;
+      }
+
+      function addAlertLog(titleId, titleEn, msgId, msgEn, showPopup) {
+        const now = new Date();
+        const dd = String(now.getDate()).padStart(2, "0");
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const yyyy = now.getFullYear();
+        const hh = String(now.getHours()).padStart(2, "0");
+        const min = String(now.getMinutes()).padStart(2, "0");
+
+        state.alerts.unshift({
+          id: "al-" + Date.now(),
+          time: `${dd}-${mm}-${yyyy} · ${hh}:${min}`,
+          titleId,
+          titleEn,
+          msgId,
+          msgEn
+        });
+        if (state.alerts.length > 25) state.alerts.pop();
+
+        if (showPopup) {
+          const activeTitle = state.lang === "en" ? titleEn : titleId;
+          const activeMsg = state.lang === "en" ? msgEn : msgId;
+          triggerWindowNotification(activeTitle, activeMsg);
+        }
+      }
+
+      function updateNotificationPermissionStatus() {
+        const permEl = document.getElementById("permStatusValue");
+        const topBtnLbl = document.getElementById("grantWindowNotifLabel");
+
+        if (!("Notification" in window)) {
+          permEl.textContent = state.lang === "en" ? "Active via Persistent Screen Banner" : "Aktif via Banner Layar Wajib";
+          topBtnLbl.textContent = tr("notifGranted");
+          return;
+        }
+        if (Notification.permission === "granted") {
+          permEl.textContent = state.lang === "en" ? "GRANTED (High-Priority Window Alerts Active)" : "DIIZINKAN (Notifikasi Jendela Prioritas Aktif)";
+          permEl.style.color = "#059669";
+          topBtnLbl.textContent = tr("notifGranted");
+        } else if (Notification.permission === "denied") {
+          permEl.textContent = state.lang === "en" ? "Blocked in Browser (On-Screen Anti-DND Banner Active)" : "Diblokir Browser (Banner Layar Anti-DND Tetap Aktif)";
+          permEl.style.color = "#d97706";
+          topBtnLbl.textContent = tr("grantNotif");
+        } else {
+          permEl.textContent = state.lang === "en" ? "Awaiting Permission (Click Allow)" : "Menunggu Izin (Klik Aktifkan)";
+          permEl.style.color = "#e11d48";
+          topBtnLbl.textContent = tr("grantNotif");
+        }
+      }
+
+      async function requestBrowserPermission() {
+        if ("Notification" in window && Notification.permission !== "granted") {
+          try {
+            await Notification.requestPermission();
+          } catch (e) {}
+        }
+        updateNotificationPermissionStatus();
+      }
+
+      function renderUI() {
+        // Apply Theme
+        document.body.setAttribute("data-theme", state.theme || "blossom");
+        const themeTitles = { blossom: "Blossom", midnight: "Midnight", ocean: "Ocean", mint: "Mint" };
+        document.getElementById("themeNameLabel").textContent = themeTitles[state.theme] || "Blossom";
+        document.querySelectorAll(".swatch-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.theme === state.theme);
+        });
+
+        // Apply Language Toggle Buttons
+        document.querySelectorAll(".lang-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === state.lang);
+        });
+
+        // Apply Static Bilingual Labels
+        document.getElementById("loginSubtitle").innerHTML = tr("loginSub");
+        document.getElementById("lblChooseMember").textContent = tr("lblChooseMember");
+        document.getElementById("lblWaNumber").textContent = tr("lblWaNumber");
+        document.getElementById("loginNotifInfo").innerHTML = tr("loginNotifInfo");
+        document.getElementById("btnLoginLabel").textContent = tr("btnLoginLabel");
+
+        document.getElementById("leaseBadgeText").textContent = tr("leaseBadge");
+        document.getElementById("tabBtn-dashboard").textContent = tr("tabDashboard");
+        document.getElementById("tabBtn-alerts").textContent = `${tr("tabAlerts")} (${state.alerts.length})`;
+        document.getElementById("tabBtn-garbage").textContent = tr("tabGarbage");
+        document.getElementById("tabBtn-water").textContent = tr("tabWater");
+        document.getElementById("tabBtn-gallon").textContent = tr("tabGallon");
+        document.getElementById("tabBtn-gas").textContent = tr("tabGas");
+
+        document.getElementById("statLblGarbage").textContent = tr("statLblGarbage");
+        document.getElementById("statLblWater").textContent = tr("statLblWater");
+        document.getElementById("statLblGallon").textContent = tr("statLblGallon");
+        document.getElementById("statLblGas").textContent = tr("statLblGas");
+
+        document.getElementById("dashSettlementTitle").textContent = tr("dashSettlementTitle");
+        document.getElementById("dashSettlementSub").textContent = tr("dashSettlementSub");
+        document.getElementById("dashTriggerAlertBtn").textContent = tr("dashTriggerAlertBtn");
+        document.getElementById("dashGrandOwedLabel").textContent = tr("dashGrandOwedLabel");
+        document.getElementById("dashRotationTitle").textContent = tr("dashRotationTitle");
+        document.getElementById("dashRotationSub").innerHTML = tr("dashRotationSub");
+        document.getElementById("rotGarbageLbl").textContent = tr("rotGarbageLbl");
+        document.getElementById("rotGallonLbl").textContent = tr("rotGallonLbl");
+        document.getElementById("rotGasLbl").textContent = tr("rotGasLbl");
+
+        document.getElementById("alertsPanelTitle").textContent = tr("alertsPanelTitle");
+        document.getElementById("alertsPanelDesc").textContent = tr("alertsPanelDesc");
+        document.getElementById("permStatusPrefix").textContent = tr("permStatusPrefix");
+        document.getElementById("btnReqPerm").textContent = tr("btnReqPerm");
+        document.getElementById("btnTestWaterAlert").textContent = tr("btnTestWaterAlert");
+        document.getElementById("btnTestGallonAlert").textContent = tr("btnTestGallonAlert");
+        document.getElementById("alertsLogHeading").textContent = tr("alertsLogHeading");
+
+        document.getElementById("garbagePanelTitle").textContent = tr("garbagePanelTitle");
+        document.getElementById("garbagePanelSub").innerHTML = tr("garbagePanelSub");
+        document.getElementById("garbageSummaryPill").textContent = tr("garbageSummaryPill");
+        document.getElementById("thGMonth").textContent = tr("thGMonth");
+        document.getElementById("thGPeriod").textContent = tr("thGPeriod");
+        document.getElementById("thGPayer").textContent = tr("thGPayer");
+        document.getElementById("thGAmount").textContent = tr("thGAmount");
+        document.getElementById("thGStatus").textContent = tr("thGStatus");
+        document.getElementById("thGAction").textContent = tr("thGAction");
+
+        document.getElementById("waterFormTitle").textContent = tr("waterFormTitle");
+        document.getElementById("waterFormSub").innerHTML = tr("waterFormSub");
+        document.getElementById("lblWDate").textContent = tr("lblWDate");
+        document.getElementById("lblWTotal").textContent = tr("lblWTotal");
+        document.getElementById("lblWPayer").textContent = tr("lblWPayer");
+        document.getElementById("btnWSubmit").textContent = tr("btnWSubmit");
+        document.getElementById("waterListTitle").textContent = tr("waterListTitle");
+        document.getElementById("waterListSub").textContent = tr("waterListSub");
+
+        document.getElementById("gallonFormTitle").textContent = tr("gallonFormTitle");
+        document.getElementById("gallonFormSub").innerHTML = tr("gallonFormSub");
+        document.getElementById("gallonTurnPrefix").textContent = tr("gallonTurnPrefix");
+        document.getElementById("lblGlDate").textContent = tr("lblGlDate");
+        document.getElementById("lblGlPayer").textContent = tr("lblGlPayer");
+        document.getElementById("lblGlQty").textContent = tr("lblGlQty");
+        document.getElementById("btnGlSubmit").textContent = tr("btnGlSubmit");
+        document.getElementById("gallonTableTitle").textContent = tr("gallonTableTitle");
+        document.getElementById("thGlDate").textContent = tr("thGlDate");
+        document.getElementById("thGlPayer").textContent = tr("thGlPayer");
+        document.getElementById("thGlQty").textContent = tr("thGlQty");
+        document.getElementById("thGlTotal").textContent = tr("thGlTotal");
+        document.getElementById("thGlDel").textContent = tr("thGlDel");
+
+        document.getElementById("gasFormTitle").textContent = tr("gasFormTitle");
+        document.getElementById("gasFormSub").innerHTML = tr("gasFormSub");
+        document.getElementById("gasTurnPrefix").textContent = tr("gasTurnPrefix");
+        document.getElementById("lblGsDate").textContent = tr("lblGsDate");
+        document.getElementById("lblGsPayer").textContent = tr("lblGsPayer");
+        document.getElementById("lblGsPrice").textContent = tr("lblGsPrice");
+        document.getElementById("btnGsSubmit").textContent = tr("btnGsSubmit");
+        document.getElementById("gasTableTitle").textContent = tr("gasTableTitle");
+        document.getElementById("thGsTurn").textContent = tr("thGsTurn");
+        document.getElementById("thGsDate").textContent = tr("thGsDate");
+        document.getElementById("thGsPayer").textContent = tr("thGsPayer");
+        document.getElementById("thGsPrice").textContent = tr("thGsPrice");
+        document.getElementById("thGsStatus").textContent = tr("thGsStatus");
+        document.getElementById("thGsAction").textContent = tr("thGsAction");
+
+        document.getElementById("footerNote").textContent = tr("footerNote");
+        updateNotificationPermissionStatus();
+
+        // User Profile Header & Login State
+        if (state.currentUser) {
+          document.getElementById("loginModal").classList.add("hidden");
+          document.getElementById("headerUserName").textContent = state.currentUser.name;
+          document.getElementById("headerUserWa").textContent = state.currentUser.wa;
+          const av = document.getElementById("headerUserAvatar");
+          av.textContent = state.currentUser.name[0];
+          av.className = `avatar-dot av-${state.currentUser.name}`;
+          document.getElementById("topPersonalAlertText").textContent = getMemberReminderMessage(state.currentUser.name);
+        } else {
+          document.getElementById("loginModal").classList.remove("hidden");
+          document.getElementById("headerUserName").textContent = tr("notLoggedIn");
+          document.getElementById("headerUserWa").textContent = "-";
+        }
+
+        // Dashboard Totals
+        const gTotal = state.garbage.reduce((a, b) => a + b.amount, 0);
+        const gPaid = state.garbage.filter((g) => g.paid).length;
+        document.getElementById("statValGarbage").textContent = formatRp(gTotal);
+        document.getElementById("statSubGarbage").textContent = state.lang === "en"
+          ? `${gPaid}/12 months paid · Rp 20.000/mo`
+          : `${gPaid}/12 bulan lunas · Rp 20.000/bln`;
+
+        const wTotal = state.water.reduce((a, b) => a + Number(b.totalAmount), 0);
+        document.getElementById("statValWater").textContent = formatRp(wTotal);
+        document.getElementById("statSubWater").textContent = state.lang === "en"
+          ? `${state.water.length} bills · Split 4 ways`
+          : `${state.water.length} tagihan · Bagi rata 4 orang`;
+
+        const glTotal = state.gallons.reduce((a, b) => a + Number(b.totalAmount), 0);
+        const glCount = state.gallons.reduce((a, b) => a + Number(b.qty), 0);
+        document.getElementById("statValGallon").textContent = formatRp(glTotal);
+        document.getElementById("statSubGallon").textContent = state.lang === "en"
+          ? `${glCount} gallons refilled · Rp 6.000/gal`
+          : `${glCount} galon terisi · Rp 6.000/galon`;
+
+        const gsTotal = state.gas.reduce((a, b) => a + Number(b.price), 0);
+        document.getElementById("statValGas").textContent = formatRp(gsTotal);
+        document.getElementById("statSubGas").textContent = state.gas.length === 0
+          ? (state.lang === "en" ? "No refills yet" : "Belum ada isi ulang")
+          : (state.lang === "en" ? `${state.gas.length} refills recorded` : `${state.gas.length}x isi ulang`);
+
+        // Debt Cards (Atifa, Angel, Amy -> Ochi)
+        const debtWrap = document.getElementById("debtCardsContainer");
+        debtWrap.innerHTML = "";
+        let grandUnpaid = 0;
+
+        ["Atifa", "Angel", "Amy"].forEach((member) => {
+          let memberUnpaid = 0;
+          let rows = "";
+          state.water.forEach((w, idx) => {
+            if (w.payer !== member) {
+              const paid = !!w.settledBy[member];
+              if (!paid) memberUnpaid += Number(w.sharePerPerson);
+              rows += `
+                <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0; border-bottom:1px solid #e2e8f0;">
+                  <span style="color:var(--text-sub);">${state.lang === "en" ? "WATER" : "AIR"} ${idx + 1} (${w.displayDate})</span>
+                  <strong style="${paid ? "text-decoration:line-through; color:#15803d;" : "color:#0f172a;"}">${formatRp(w.sharePerPerson)}</strong>
+                </div>
+              `;
+            }
+          });
+          grandUnpaid += memberUnpaid;
+
+          const card = document.createElement("div");
+          card.className = "debt-card";
+          card.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="avatar-dot av-${member}" style="width:24px; height:24px; font-size:11px;">${member[0]}</span>
+                <strong style="font-size:14px;">${member}</strong>
+              </div>
+              <span class="badge ${memberUnpaid === 0 ? "badge-paid" : "badge-unpaid"}">
+                ${memberUnpaid === 0 ? tr("paidBadge") : tr("unpaidBadge")}
+              </span>
+            </div>
+            <div>${rows}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding-top:8px; border-top:1.5px solid #cbd5e1; font-size:12px;">
+              <span style="font-weight:700; color:var(--text-sub);">${tr("overallLbl")}</span>
+              <strong style="font-size:14px; color:${memberUnpaid === 0 ? "#15803d" : "#b91c1c"};">${formatRp(memberUnpaid)}</strong>
+            </div>
+          `;
+          debtWrap.appendChild(card);
+        });
+
+        document.getElementById("dashGrandOwedVal").textContent = formatRp(grandUnpaid);
+
+        // Next Rotation Badges
+        const nextG = state.garbage.find((g) => !g.paid);
+        document.getElementById("rotGarbageVal").textContent = nextG
+          ? `${nextG.payer} (${state.lang === "en" ? MONTHS_EN[nextG.monthIndex - 1] : MONTHS_ID[nextG.monthIndex - 1]})`
+          : (state.lang === "en" ? "All 12 Months Paid!" : "Semua 12 Bulan Lunas!");
+
+        const nextGlMember = MEMBERS[state.gallons.length % 4];
+        document.getElementById("rotGallonVal").textContent = nextGlMember;
+        document.getElementById("gallonNextTurnBadge").textContent = nextGlMember;
+        document.getElementById("glPayerInput").value = nextGlMember;
+
+        const nextGsMember = MEMBERS[state.gas.length % 4];
+        document.getElementById("rotGasVal").textContent = nextGsMember;
+        document.getElementById("gasNextTurnBadge").textContent = nextGsMember;
+        document.getElementById("gsPayerInput").value = nextGsMember;
+
+        // Alerts Feed
+        document.getElementById("headerBellCount").textContent = state.alerts.length;
+        const logList = document.getElementById("alertsLogList");
+        logList.innerHTML = state.alerts.map((al) => `
+          <div style="padding:14px; border-radius:16px; border:1px solid var(--border-color); background:#f8fafc; display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <div>
+              <div style="font-size:12px; font-weight:900; color:#e11d48;">${state.lang === "en" ? al.titleEn : al.titleId}</div>
+              <div style="font-size:13px; font-weight:600; color:var(--text-main); margin-top:3px;">${state.lang === "en" ? al.msgEn : al.msgId}</div>
+            </div>
+            <span style="font-size:11px; color:var(--text-light); white-space:nowrap;">${al.time}</span>
+          </div>
+        `).join("");
+
+        // Garbage Table
+        const gTbody = document.getElementById("garbageTbody");
+        gTbody.innerHTML = state.garbage.map((item) => {
+          const periodLabel = state.lang === "en" ? MONTHS_EN[item.monthIndex - 1] : MONTHS_ID[item.monthIndex - 1];
+          return `
+            <tr>
+              <td style="font-weight:800; color:var(--text-light);">#${item.monthIndex}</td>
+              <td style="font-weight:700;">${periodLabel}</td>
+              <td>
+                <span style="display:inline-flex; align-items:center; gap:6px; font-weight:800;">
+                  <span class="avatar-dot av-${item.payer}" style="width:20px; height:20px; font-size:10px;">${item.payer[0]}</span>
+                  ${item.payer}
+                </span>
+              </td>
+              <td style="font-weight:800;">${formatRp(item.amount)}</td>
+              <td>
+                <span class="badge ${item.paid ? "badge-paid" : "badge-unpaid"}">
+                  ${item.paid ? `${tr("paidBadge")} (${item.paidDate})` : tr("unpaidBadge")}
+                </span>
+              </td>
+              <td style="text-align:right;">
+                <button type="button" data-gid="${item.id}" class="btn-toggle-garbage" style="padding:6px 12px; border-radius:10px; font-size:12px; font-weight:800; background:${item.paid ? "#e2e8f0" : "#10b981"}; color:${item.paid ? "#334155" : "#fff"};">
+                  ${item.paid ? tr("undoPaid") : tr("markPaid")}
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join("");
+
+        document.querySelectorAll(".btn-toggle-garbage").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const target = state.garbage.find((g) => g.id === btn.dataset.gid);
+            if (!target) return;
+            target.paid = !target.paid;
+            const todayStr = formatDateDisplay(new Date().toISOString().slice(0, 10));
+            target.paidDate = target.paid ? todayStr : "";
+            if (target.paid) {
+              const pId = MONTHS_ID[target.monthIndex - 1].toUpperCase();
+              const pEn = MONTHS_EN[target.monthIndex - 1].toUpperCase();
+              addAlertLog(
+                "PEMBAYARAN SAMPAH",
+                "GARBAGE PAYMENT",
+                `${target.payer.toUpperCase()} TELAH MEMBAYAR IURAN SAMPAH BULAN ${pId} (${formatRp(target.amount)})`,
+                `${target.payer.toUpperCase()} HAS PAID THE GARBAGE FEE FOR ${pEn} (${formatRp(target.amount)})`,
+                true
+              );
+            }
+            saveStoredState(state);
+            renderUI();
+          });
+        });
+
+        // Water Cards
+        document.getElementById("waterTotalBadge").textContent = `Total Air: ${formatRp(wTotal)}`;
+        const wList = document.getElementById("waterCardsList");
+        wList.innerHTML = state.water.map((w, idx) => {
+          const checks = MEMBERS.filter((m) => m !== w.payer).map((m) => {
+            const isChecked = !!w.settledBy[m];
+            return `
+              <label style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:14px; border:1px solid ${isChecked ? "#86efac" : "#cbd5e1"}; background:${isChecked ? "#f0fdf4" : "#fff"}; cursor:pointer;">
+                <span style="display:flex; align-items:center; gap:8px; font-weight:800; font-size:13px;">
+                  <input type="checkbox" class="chk-water-settle" data-wid="${w.id}" data-member="${m}" ${isChecked ? "checked" : ""} style="width:16px; height:16px; accent-color:#16a34a;" />
+                  ${m}
+                </span>
+                <strong style="font-size:12px; color:${isChecked ? "#15803d" : "#b91c1c"};">${formatRp(w.sharePerPerson)} ${isChecked ? "✓" : ""}</strong>
+              </label>
+            `;
+          }).join("");
+
+          return `
+            <div style="border:1px solid var(--border-color); border-radius:18px; padding:16px; background:#f8fafc;">
+              <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-bottom:12px;">
+                <div>
+                  <span class="badge badge-info">${state.lang === "en" ? "WATER" : "AIR"} ${idx + 1} · ${w.displayDate}</span>
+                  <div style="font-size:16px; font-weight:900; margin-top:4px;">
+                    Total: ${formatRp(w.totalAmount)} <span style="font-size:12px; font-weight:600; color:var(--text-sub);">(${state.lang === "en" ? "Paid by" : "Ditalangi"} ${w.payer})</span>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:11px; color:var(--text-light); font-weight:700;">${state.lang === "en" ? "Share / Person (÷ 4)" : "Bagian / Orang (÷ 4)"}</div>
+                  <strong style="font-size:15px; color:#0284c7;">${formatRp(w.sharePerPerson)}</strong>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px;">
+                ${checks}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        document.querySelectorAll(".chk-water-settle").forEach((chk) => {
+          chk.addEventListener("change", () => {
+            const wObj = state.water.find((x) => x.id === chk.dataset.wid);
+            if (!wObj) return;
+            const mem = chk.dataset.member;
+            wObj.settledBy[mem] = chk.checked;
+            if (chk.checked) {
+              addAlertLog(
+                "PELUNASAN AIR PAM",
+                "WATER BILL SETTLED",
+                `${mem.toUpperCase()} TELAH MEMBAYAR UANG AIR KEPADA ${wObj.payer.toUpperCase()} SEBESAR ${formatRp(wObj.sharePerPerson)}`,
+                `${mem.toUpperCase()} HAS PAID THEIR WATER BILL SHARE TO ${wObj.payer.toUpperCase()} (${formatRp(wObj.sharePerPerson)})`,
+                true
+              );
+            }
+            saveStoredState(state);
+            renderUI();
+          });
+        });
+
+        // Gallon Table
+        document.getElementById("gallonTotalBadge").textContent = `Total: ${formatRp(glTotal)}`;
+        const glTbody = document.getElementById("gallonTbody");
+        if (state.gallons.length === 0) {
+          glTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-light); font-size:12px;">${tr("emptyGallon")}</td></tr>`;
+        } else {
+          glTbody.innerHTML = state.gallons.map((g, idx) => `
+            <tr>
+              <td style="font-weight:800; color:var(--text-light);">#${idx + 1}</td>
+              <td style="font-weight:700;">${g.displayDate}</td>
+              <td style="font-weight:800; color:#4338ca;">${g.payer}</td>
+              <td style="font-weight:700;">${g.qty} ${state.lang === "en" ? "Gallon(s)" : "Galon"}</td>
+              <td style="font-weight:900;">${formatRp(g.totalAmount)}</td>
+              <td style="text-align:right;">
+                <button type="button" data-glid="${g.id}" class="btn-del-gl" style="color:#e11d48; font-weight:800; font-size:12px;">${tr("thGlDel")}</button>
+              </td>
+            </tr>
+          `).join("");
+          document.querySelectorAll(".btn-del-gl").forEach((b) => {
+            b.addEventListener("click", () => {
+              state.gallons = state.gallons.filter((x) => x.id !== b.dataset.glid);
+              saveStoredState(state);
+              renderUI();
+            });
+          });
+        }
+
+        // Gas Table
+        document.getElementById("gasTotalBadge").textContent = `Total: ${formatRp(gsTotal)}`;
+        const gsTbody = document.getElementById("gasTbody");
+        if (state.gas.length === 0) {
+          gsTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-light); font-size:12px;">${tr("emptyGas")}</td></tr>`;
+        } else {
+          gsTbody.innerHTML = state.gas.map((g, idx) => `
+            <tr>
+              <td style="font-weight:800; color:var(--text-light);">#${idx + 1}</td>
+              <td style="font-weight:700;">${g.displayDate}</td>
+              <td style="font-weight:800; color:#c2410c;">${g.payer}</td>
+              <td style="font-weight:900;">${formatRp(g.price)}</td>
+              <td><span class="badge badge-paid">${tr("paidBadge")}</span></td>
+              <td style="text-align:right;">
+                <button type="button" data-gsid="${g.id}" class="btn-del-gs" style="color:#e11d48; font-weight:800; font-size:12px;">${tr("thGlDel")}</button>
+              </td>
+            </tr>
+          `).join("");
+          document.querySelectorAll(".btn-del-gs").forEach((b) => {
+            b.addEventListener("click", () => {
+              state.gas = state.gas.filter((x) => x.id !== b.dataset.gsid);
+              saveStoredState(state);
+              renderUI();
+            });
+          });
+        }
+      }
+
+      // Initialize Dates & Event Listeners
+      const todayIso = new Date().toISOString().slice(0, 10);
+      document.getElementById("wDateInput").value = todayIso;
+      document.getElementById("glDateInput").value = todayIso;
+      document.getElementById("gsDateInput").value = todayIso;
+
+      // Language Switchers
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.lang = btn.dataset.lang;
+          saveStoredState(state);
+          renderUI();
+        });
+      });
+
+      // Theme Swatches
+      document.querySelectorAll(".swatch-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.theme = btn.dataset.theme;
+          saveStoredState(state);
+          renderUI();
+        });
+      });
+
+      // Login Profile Selection
+      document.querySelectorAll(".member-choice").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".member-choice").forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          document.getElementById("selectedMemberInput").value = btn.dataset.member;
+        });
+      });
+
+      // Login Form Submit -> Show English Welcome Modal + Trigger Window Alert
+      document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const memberName = document.getElementById("selectedMemberInput").value;
+        const waRaw = document.getElementById("waNumberInput").value.trim();
+
+        if (!memberName) {
+          triggerWindowNotification(
+            state.lang === "en" ? "SELECT PROFILE" : "PILIH PROFIL DULU",
+            state.lang === "en" ? "Please tap your name (Ochi, Atifa, Angel, or Amy)." : "Silakan klik salah satu nama anggota (Ochi, Atifa, Angel, atau Amy)."
+          );
+          return;
+        }
+
+        const formattedWa = waRaw.startsWith("0") ? waRaw : "0" + waRaw;
+        state.currentUser = { name: memberName, wa: formattedWa };
+        saveStoredState(state);
+        renderUI();
+
+        await requestBrowserPermission();
+
+        // English Welcome Modal
+        const upperName = memberName.toUpperCase();
+        document.getElementById("welcomeHeadingText").textContent = `WELCOME ${upperName}, TO HOUSE MATE GIRLS!`;
+        document.getElementById("welcomeDebtSummaryEn").textContent = getMemberReminderMessage(memberName, "en");
+        document.getElementById("welcomeModal").classList.remove("hidden");
+
+        // Trigger Window Alert
+        const reminderMsg = getMemberReminderMessage(memberName);
+        triggerWindowNotification(`WELCOME ${upperName}, TO HOUSE MATE GIRLS!`, reminderMsg);
+      });
+
+      document.getElementById("closeWelcomeBtn").addEventListener("click", () => {
+        document.getElementById("welcomeModal").classList.add("hidden");
+      });
+
+      document.getElementById("switchUserBtn").addEventListener("click", () => {
+        document.getElementById("loginModal").classList.remove("hidden");
+      });
+
+      // Tab Navigation
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.querySelectorAll(".tab-panel").forEach((p) => p.classList.add("hidden"));
+          document.getElementById("panel-" + btn.dataset.tab).classList.remove("hidden");
+        });
+      });
+
+      // Water PAM Submit
+      document.getElementById("waterForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const dateVal = document.getElementById("wDateInput").value;
+        const totalVal = Number(document.getElementById("wTotalInput").value);
+        const payerVal = document.getElementById("wPayerInput").value;
+        const share = Math.floor(totalVal / 4);
+
+        state.water.push({
+          id: "w-" + Date.now(),
+          date: dateVal,
+          displayDate: formatDateDisplay(dateVal),
+          totalAmount: totalVal,
+          sharePerPerson: share,
+          payer: payerVal,
+          settledBy: {
+            Ochi: payerVal === "Ochi",
+            Atifa: payerVal === "Atifa",
+            Angel: payerVal === "Angel",
+            Amy: payerVal === "Amy"
+          }
+        });
+
+        const debtors = MEMBERS.filter((m) => m !== payerVal).join(", ").toUpperCase();
+        addAlertLog(
+          "TAGIHAN AIR PAM BARU",
+          "NEW WATER BILL ALERT",
+          `HALLO ${debtors} ANDA PERLU MEMBAYAR UANG AIR KEPADA ${payerVal.toUpperCase()} SEBESAR ${formatRp(share)}`,
+          `HELLO ${debtors} YOU NEED TO PAY THE WATER BILL TO ${payerVal.toUpperCase()} AMOUNTING TO ${formatRp(share)}`,
+          true
+        );
+
+        document.getElementById("wTotalInput").value = "";
+        saveStoredState(state);
+        renderUI();
+      });
+
+      // Gallon Submit
+      document.getElementById("gallonForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const dateVal = document.getElementById("glDateInput").value;
+        const payerVal = document.getElementById("glPayerInput").value;
+        const qtyVal = Number(document.getElementById("glQtyInput").value);
+        const totalVal = qtyVal * 6000;
+
+        state.gallons.unshift({
+          id: "gl-" + Date.now(),
+          date: dateVal,
+          displayDate: formatDateDisplay(dateVal),
+          payer: payerVal,
+          qty: qtyVal,
+          totalAmount: totalVal
+        });
+
+        addAlertLog(
+          "PEMBAYARAN GALON AIR",
+          "GALLON REFILL PAID",
+          `${payerVal.toUpperCase()} TELAH MEMBAYAR GALON AIR ${qtyVal} GALON (${formatRp(totalVal)})`,
+          `${payerVal.toUpperCase()} HAS PAID FOR ${qtyVal} WATER GALLON(S) (${formatRp(totalVal)})`,
+          true
+        );
+
+        saveStoredState(state);
+        renderUI();
+      });
+
+      // Gas LPG Submit
+      document.getElementById("gasForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const dateVal = document.getElementById("gsDateInput").value;
+        const payerVal = document.getElementById("gsPayerInput").value;
+        const priceVal = Number(document.getElementById("gsPriceInput").value);
+
+        state.gas.unshift({
+          id: "gs-" + Date.now(),
+          date: dateVal,
+          displayDate: formatDateDisplay(dateVal),
+          payer: payerVal,
+          price: priceVal
+        });
+
+        addAlertLog(
+          "PEMBELIAN GAS LPG",
+          "LPG GAS PURCHASED",
+          `${payerVal.toUpperCase()} TELAH MEMBAYAR GAS LPG SEBESAR ${formatRp(priceVal)}`,
+          `${payerVal.toUpperCase()} HAS PAID FOR LPG GAS AMOUNTING TO ${formatRp(priceVal)}`,
+          true
+        );
+
+        document.getElementById("gsPriceInput").value = "";
+        saveStoredState(state);
+        renderUI();
+      });
+
+      // Notification Test & Permission Buttons
+      document.getElementById("grantWindowNotifBtn").addEventListener("click", async () => {
+        await requestBrowserPermission();
+        const name = state.currentUser ? state.currentUser.name : "Angel";
+        triggerWindowNotification("HOUSE MATE GIRLS · ANTI-DND", getMemberReminderMessage(name));
+      });
+
+      document.getElementById("btnReqPerm").addEventListener("click", requestBrowserPermission);
+
+      document.getElementById("headerBellBtn").addEventListener("click", () => {
+        const name = state.currentUser ? state.currentUser.name : "Angel";
+        triggerWindowNotification("HOUSE MATE GIRLS · PRIORITY REMINDER", getMemberReminderMessage(name));
+      });
+
+      document.getElementById("dashTriggerAlertBtn").addEventListener("click", () => {
+        const name = state.currentUser ? state.currentUser.name : "Angel";
+        triggerWindowNotification("HOUSE MATE GIRLS · REMINDER", getMemberReminderMessage(name));
+      });
+
+      document.getElementById("btnTestWaterAlert").addEventListener("click", () => {
+        const name = state.currentUser ? state.currentUser.name : "Angel";
+        const msg = state.lang === "en"
+          ? `HELLO ${name.toUpperCase()}, YOU NEED TO PAY THE WATER BILL TO OCHI AMOUNTING TO Rp 20.473`
+          : `HALLO ${name.toUpperCase()} ANDA PERLU MEMBAYAR UANG AIR KEPADA OCHI SEBESAR Rp 20.473`;
+        triggerWindowNotification("WATER BILL REMINDER", msg);
+      });
+
+      document.getElementById("btnTestGallonAlert").addEventListener("click", () => {
+        const msg = state.lang === "en"
+          ? "AMY HAS PAID FOR 2 WATER GALLON(S) (Rp 12.000)"
+          : "AMY TELAH MEMBAYAR GALON AIR 2 GALON (Rp 12.000)";
+        triggerWindowNotification("GALLON PAYMENT UPDATE", msg);
+      });
+
+      // Mandatory Periodic Reminder Loop (every 4 minutes)
+      setInterval(() => {
+        if (!state.currentUser) return;
+        const msg = getMemberReminderMessage(state.currentUser.name);
+        if (msg.includes("PERLU MEMBAYAR") || msg.includes("NEED TO PAY") || msg.includes("BELUM DIBAYAR") || msg.includes("UNPAID")) {
+          triggerWindowNotification("MANDATORY BILL REMINDER", msg);
+        }
+      }, 240000);
+
+      // Initial Render
+      renderUI();
+    })();
+  </script>
+</body>
+</html>
