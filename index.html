@@ -1007,6 +1007,172 @@
       </div>
     </section>
 
+    <!-- TAB 4: WATER PAM (AIR PAM) -->
+    <section id="panel-water" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <h2 id="waterFormTitle" style="font-size:18px; font-weight:900;">Catat Tagihan Air PAM Baru</h2>
+        <p id="waterFormSub" style="font-size:12px; color:var(--text-sub);">Total pembayaran otomatis dibagi 4 orang (<strong>Total ÷ 4</strong>) dan memunculkan notifikasi tagihan.</p>
+
+        <form id="waterForm" class="form-row-4">
+          <div>
+            <label id="lblWDate" class="form-label">Tanggal Bayar</label>
+            <input type="date" id="wDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblWTotal" class="form-label">Total Tagihan (Rp)</label>
+            <input type="number" id="wTotalInput" class="input-box" placeholder="55385" min="1" required />
+          </div>
+          <div>
+            <label id="lblWPayer" class="form-label">Yang Bayar Duluan</label>
+            <select id="wPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnWSubmit" class="btn-action" style="background:#0284c7;">+ Simpan &amp; Bagi 4</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;">
+          <div>
+            <h3 id="waterListTitle" style="font-size:17px; font-weight:900;">Rincian Tagihan Air PAM &amp; Checklist Pelunasan</h3>
+            <p id="waterListSub" style="font-size:12px; color:var(--text-sub);">Centang jika masing-masing anggota sudah membayar bagiannya.</p>
+          </div>
+          <span id="waterTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 14px;">Total Air: Rp 81.896</span>
+        </div>
+        <div id="waterCardsList" style="display:flex; flex-direction:column; gap:14px;"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GALLON (GALON 3 BOTOL) -->
+    <section id="panel-gallon" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <h2 id="gallonFormTitle" style="font-size:18px; font-weight:900;">Catat Isi Ulang Galon (Rp 6.000 / Galon)</h2>
+            <p id="gallonFormSub" style="font-size:12px; color:var(--text-sub);">Di rumah tersedia <strong>3 galon</strong> (bisa diisi 1, 2, atau 3 galon). Bergantian: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
+          </div>
+          <span class="badge badge-info" style="font-size:12px; padding:6px 12px;">
+            <span id="gallonTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gallonNextTurnBadge">Ochi</strong>
+          </span>
+        </div>
+
+        <form id="gallonForm" class="form-row-4">
+          <div>
+            <label id="lblGlDate" class="form-label">Tanggal Isi</label>
+            <input type="date" id="glDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblGlPayer" class="form-label">Pembayar (Giliran)</label>
+            <select id="glPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div>
+            <label id="lblGlQty" class="form-label">Jumlah Galon</label>
+            <select id="glQtyInput" class="input-box">
+              <option value="1">1 Galon / Gallon (Rp 6.000)</option>
+              <option value="2" selected>2 Galon / Gallons (Rp 12.000)</option>
+              <option value="3">3 Galon / Gallons (Rp 18.000)</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnGlSubmit" class="btn-action" style="background:#4f46e5;">+ Simpan &amp; Kirim Notif</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h3 id="gallonTableTitle" style="font-size:17px; font-weight:900;">Riwayat Isi Ulang Galon</h3>
+          <span id="gallonTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 12px;">Total: Rp 0</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th id="thGlDate">Tanggal</th>
+                <th id="thGlPayer">Pembayar</th>
+                <th id="thGlQty">Jumlah</th>
+                <th id="thGlTotal">Total</th>
+                <th id="thGlDel" style="text-align:right;">Hapus</th>
+              </tr>
+            </thead>
+            <tbody id="gallonTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: LPG GAS (GAS LPG) -->
+    <section id="panel-gas" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+      <div class="card">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <h2 id="gasFormTitle" style="font-size:18px; font-weight:900;">Pengeluaran Gas LPG (Giliran Bergantian)</h2>
+            <p id="gasFormSub" style="font-size:12px; color:var(--text-sub);">Saat ini belum ada isi ulang gas. Jika nanti sudah beli, masukkan harga dan pembayar sesuai urutan: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
+          </div>
+          <span class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">
+            <span id="gasTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gasNextTurnBadge">Ochi</strong>
+          </span>
+        </div>
+
+        <form id="gasForm" class="form-row-4">
+          <div>
+            <label id="lblGsDate" class="form-label">Tanggal Beli Gas</label>
+            <input type="date" id="gsDateInput" class="input-box" required />
+          </div>
+          <div>
+            <label id="lblGsPayer" class="form-label">Pembayar (Giliran)</label>
+            <select id="gsPayerInput" class="input-box">
+              <option value="Ochi">Ochi</option>
+              <option value="Atifa">Atifa</option>
+              <option value="Angel">Angel</option>
+              <option value="Amy">Amy</option>
+            </select>
+          </div>
+          <div>
+            <label id="lblGsPrice" class="form-label">Harga Gas LPG (Rp)</label>
+            <input type="number" id="gsPriceInput" class="input-box" placeholder="22000" min="1" required />
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button type="submit" id="btnGsSubmit" class="btn-action" style="background:#ea580c;">+ Catat Pembelian Gas</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h3 id="gasTableTitle" style="font-size:17px; font-weight:900;">Tabel Pengeluaran Gas LPG</h3>
+          <span id="gasTotalBadge" class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">Total: Rp 0</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th id="thGsTurn">Giliran</th>
+                <th id="thGsDate">Tanggal</th>
+                <th id="thGsPayer">Pembayar</th>
+                <th id="thGsPrice">Nominal Harga</th>
+                <th id="thGsStatus">Status</th>
+                <th id="thGsAction" style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="gasTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- TAB 7: TOKEN LISTRIK (Rp 50.000 / MINGGU · Rp 200.000 / BULAN) -->
 <section id="panel-token" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
   <div class="card">
@@ -1238,172 +1404,6 @@
   });
 })();
 </script>
-
-    <!-- TAB 4: WATER PAM (AIR PAM) -->
-    <section id="panel-water" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
-      <div class="card">
-        <h2 id="waterFormTitle" style="font-size:18px; font-weight:900;">Catat Tagihan Air PAM Baru</h2>
-        <p id="waterFormSub" style="font-size:12px; color:var(--text-sub);">Total pembayaran otomatis dibagi 4 orang (<strong>Total ÷ 4</strong>) dan memunculkan notifikasi tagihan.</p>
-
-        <form id="waterForm" class="form-row-4">
-          <div>
-            <label id="lblWDate" class="form-label">Tanggal Bayar</label>
-            <input type="date" id="wDateInput" class="input-box" required />
-          </div>
-          <div>
-            <label id="lblWTotal" class="form-label">Total Tagihan (Rp)</label>
-            <input type="number" id="wTotalInput" class="input-box" placeholder="55385" min="1" required />
-          </div>
-          <div>
-            <label id="lblWPayer" class="form-label">Yang Bayar Duluan</label>
-            <select id="wPayerInput" class="input-box">
-              <option value="Ochi">Ochi</option>
-              <option value="Atifa">Atifa</option>
-              <option value="Angel">Angel</option>
-              <option value="Amy">Amy</option>
-            </select>
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button type="submit" id="btnWSubmit" class="btn-action" style="background:#0284c7;">+ Simpan &amp; Bagi 4</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;">
-          <div>
-            <h3 id="waterListTitle" style="font-size:17px; font-weight:900;">Rincian Tagihan Air PAM &amp; Checklist Pelunasan</h3>
-            <p id="waterListSub" style="font-size:12px; color:var(--text-sub);">Centang jika masing-masing anggota sudah membayar bagiannya.</p>
-          </div>
-          <span id="waterTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 14px;">Total Air: Rp 81.896</span>
-        </div>
-        <div id="waterCardsList" style="display:flex; flex-direction:column; gap:14px;"></div>
-      </div>
-    </section>
-
-    <!-- TAB 5: GALLON (GALON 3 BOTOL) -->
-    <section id="panel-gallon" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
-      <div class="card">
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
-          <div>
-            <h2 id="gallonFormTitle" style="font-size:18px; font-weight:900;">Catat Isi Ulang Galon (Rp 6.000 / Galon)</h2>
-            <p id="gallonFormSub" style="font-size:12px; color:var(--text-sub);">Di rumah tersedia <strong>3 galon</strong> (bisa diisi 1, 2, atau 3 galon). Bergantian: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
-          </div>
-          <span class="badge badge-info" style="font-size:12px; padding:6px 12px;">
-            <span id="gallonTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gallonNextTurnBadge">Ochi</strong>
-          </span>
-        </div>
-
-        <form id="gallonForm" class="form-row-4">
-          <div>
-            <label id="lblGlDate" class="form-label">Tanggal Isi</label>
-            <input type="date" id="glDateInput" class="input-box" required />
-          </div>
-          <div>
-            <label id="lblGlPayer" class="form-label">Pembayar (Giliran)</label>
-            <select id="glPayerInput" class="input-box">
-              <option value="Ochi">Ochi</option>
-              <option value="Atifa">Atifa</option>
-              <option value="Angel">Angel</option>
-              <option value="Amy">Amy</option>
-            </select>
-          </div>
-          <div>
-            <label id="lblGlQty" class="form-label">Jumlah Galon</label>
-            <select id="glQtyInput" class="input-box">
-              <option value="1">1 Galon / Gallon (Rp 6.000)</option>
-              <option value="2" selected>2 Galon / Gallons (Rp 12.000)</option>
-              <option value="3">3 Galon / Gallons (Rp 18.000)</option>
-            </select>
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button type="submit" id="btnGlSubmit" class="btn-action" style="background:#4f46e5;">+ Simpan &amp; Kirim Notif</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-          <h3 id="gallonTableTitle" style="font-size:17px; font-weight:900;">Riwayat Isi Ulang Galon</h3>
-          <span id="gallonTotalBadge" class="badge badge-info" style="font-size:12px; padding:6px 12px;">Total: Rp 0</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th id="thGlDate">Tanggal</th>
-                <th id="thGlPayer">Pembayar</th>
-                <th id="thGlQty">Jumlah</th>
-                <th id="thGlTotal">Total</th>
-                <th id="thGlDel" style="text-align:right;">Hapus</th>
-              </tr>
-            </thead>
-            <tbody id="gallonTbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 6: LPG GAS (GAS LPG) -->
-    <section id="panel-gas" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
-      <div class="card">
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
-          <div>
-            <h2 id="gasFormTitle" style="font-size:18px; font-weight:900;">Pengeluaran Gas LPG (Giliran Bergantian)</h2>
-            <p id="gasFormSub" style="font-size:12px; color:var(--text-sub);">Saat ini belum ada isi ulang gas. Jika nanti sudah beli, masukkan harga dan pembayar sesuai urutan: <strong>Ochi → Atifa → Angel → Amy</strong>.</p>
-          </div>
-          <span class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">
-            <span id="gasTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="gasNextTurnBadge">Ochi</strong>
-          </span>
-        </div>
-
-        <form id="gasForm" class="form-row-4">
-          <div>
-            <label id="lblGsDate" class="form-label">Tanggal Beli Gas</label>
-            <input type="date" id="gsDateInput" class="input-box" required />
-          </div>
-          <div>
-            <label id="lblGsPayer" class="form-label">Pembayar (Giliran)</label>
-            <select id="gsPayerInput" class="input-box">
-              <option value="Ochi">Ochi</option>
-              <option value="Atifa">Atifa</option>
-              <option value="Angel">Angel</option>
-              <option value="Amy">Amy</option>
-            </select>
-          </div>
-          <div>
-            <label id="lblGsPrice" class="form-label">Harga Gas LPG (Rp)</label>
-            <input type="number" id="gsPriceInput" class="input-box" placeholder="22000" min="1" required />
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button type="submit" id="btnGsSubmit" class="btn-action" style="background:#ea580c;">+ Catat Pembelian Gas</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="card">
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-          <h3 id="gasTableTitle" style="font-size:17px; font-weight:900;">Tabel Pengeluaran Gas LPG</h3>
-          <span id="gasTotalBadge" class="badge" style="background:#ffedd5; color:#c2410c; font-size:12px; padding:6px 12px;">Total: Rp 0</span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th id="thGsTurn">Giliran</th>
-                <th id="thGsDate">Tanggal</th>
-                <th id="thGsPayer">Pembayar</th>
-                <th id="thGsPrice">Nominal Harga</th>
-                <th id="thGsStatus">Status</th>
-                <th id="thGsAction" style="text-align:right;">Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="gasTbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
 
   </main>
 
