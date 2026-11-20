@@ -1007,6 +1007,238 @@
       </div>
     </section>
 
+    <!-- TAB 7: TOKEN LISTRIK (Rp 50.000 / MINGGU · Rp 200.000 / BULAN) -->
+<section id="panel-token" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
+  <div class="card">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;">
+      <div>
+        <h2 id="tokenPanelTitle" style="font-size:18px; font-weight:900;">Token Listrik (Rp 50.000 / Minggu · Rp 200.000 / Bulan)</h2>
+        <p id="tokenPanelSub" style="font-size:12px; color:var(--text-sub);">Giliran 4 orang: Ochi → Atifa → Angel → Amy (4 minggu = Rp 200.000/bulan)</p>
+      </div>
+      <span class="badge" style="background:#fef3c7; color:#b45309; font-size:12px; padding:6px 12px;">
+        <span id="tokenTurnPrefix">Giliran Berikutnya:</span>&nbsp;<strong id="tokenNextBadge">Ochi</strong>
+      </span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">
+      <div class="card" style="padding:12px;">
+        <div style="font-size:12px; color:var(--text-sub);">Tarif / Minggu</div>
+        <div style="font-size:17px; font-weight:800; margin-top:4px;">Rp 50.000</div>
+      </div>
+      <div class="card" style="padding:12px;">
+        <div style="font-size:12px; color:var(--text-sub);">Target / Bulan (4 Minggu)</div>
+        <div style="font-size:17px; font-weight:800; margin-top:4px;">Rp 200.000</div>
+      </div>
+      <div class="card" style="padding:12px;">
+        <div style="font-size:12px; color:var(--text-sub);">Total Token Tercatat</div>
+        <div id="tokenTotalSummary" style="font-size:17px; font-weight:800; margin-top:4px;">Rp 0</div>
+      </div>
+    </div>
+
+    <form id="tokenPayForm" onsubmit="submitTokenPay(event)" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; align-items:end;">
+      <div>
+        <label class="form-label" for="tkDateInput">Tanggal Bayar</label>
+        <input type="date" id="tkDateInput" class="input-box" required />
+      </div>
+
+      <div>
+        <label class="form-label" for="tkWeekInput">Minggu Ke-</label>
+        <select id="tkWeekInput" class="input-box">
+          <option value="Minggu 1">Minggu 1</option>
+          <option value="Minggu 2">Minggu 2</option>
+          <option value="Minggu 3">Minggu 3</option>
+          <option value="Minggu 4">Minggu 4</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label" for="tkPayerInput">Pembayar (Giliran)</label>
+        <select id="tkPayerInput" class="input-box">
+          <option value="Ochi">Ochi</option>
+          <option value="Atifa">Atifa</option>
+          <option value="Angel">Angel</option>
+          <option value="Amy">Amy</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label" for="tkAmountInput">Nominal (Rp)</label>
+        <input type="number" id="tkAmountInput" class="input-box" value="50000" min="1000" step="1000" required />
+      </div>
+
+      <div>
+        <label class="form-label" for="tkProofFile">Foto Bukti Pembayaran</label>
+        <input type="file" id="tkProofFile" class="input-box" accept="image/*" />
+      </div>
+
+      <div>
+        <button type="submit" class="btn-primary" style="width:100%;">+ Simpan Token</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:16px; font-weight:800; margin-bottom:12px;">Riwayat Token &amp; Bukti Pembayaran</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">No</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Tanggal</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Minggu</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Pembayar</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Nominal</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Bukti Foto</th>
+            <th style="padding:10px; text-align:left; border-bottom:1px solid var(--border-color);">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tkHistoryBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL PRATINJAU FOTO BUKTI TOKEN -->
+<div id="tkProofModal" onclick="if(event.target.id==='tkProofModal') closeTkProofModal()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:var(--bg-card, #fff); color:var(--text-main, #0f172a); max-width:480px; width:100%; border-radius:14px; padding:16px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <strong id="tkProofTitle">Bukti Pembayaran Token</strong>
+      <button type="button" onclick="closeTkProofModal()" style="cursor:pointer; padding:4px 10px; border-radius:6px; border:none;">✕</button>
+    </div>
+    <img id="tkProofImg" src="" alt="Bukti Pembayaran Token" style="width:100%; max-height:70vh; object-fit:contain; border-radius:8px;" />
+  </div>
+</div>
+
+<script>
+(function() {
+  const TK_KEY = "hm_token_listrik_v1";
+  const TK_MEMBERS = ["Ochi", "Atifa", "Angel", "Amy"];
+
+  function loadTkData() {
+    try { return JSON.parse(localStorage.getItem(TK_KEY)) || []; }
+    catch (e) { return []; }
+  }
+
+  function saveTkData(list) {
+    try { localStorage.setItem(TK_KEY, JSON.stringify(list)); return true; }
+    catch (e) { alert("Ukuran foto bukti terlalu besar untuk penyimpanan browser."); return false; }
+  }
+
+  function fmtRp(n) {
+    return "Rp " + Number(n || 0).toLocaleString("id-ID");
+  }
+
+  function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      if (!file) return resolve("");
+      const fr = new FileReader();
+      fr.onload = () => resolve(fr.result);
+      fr.onerror = reject;
+      fr.readAsDataURL(file);
+    });
+  }
+
+  window.openTokenTab = function() {
+    document.querySelectorAll(".tab-panel").forEach(el => el.classList.add("hidden"));
+    const sec = document.getElementById("panel-token");
+    if (sec) sec.classList.remove("hidden");
+    renderTkTable();
+  };
+
+  window.submitTokenPay = async function(ev) {
+    ev.preventDefault();
+    const date = document.getElementById("tkDateInput").value;
+    const week = document.getElementById("tkWeekInput").value;
+    const payer = document.getElementById("tkPayerInput").value;
+    const amount = Number(document.getElementById("tkAmountInput").value) || 50000;
+    const fileInput = document.getElementById("tkProofFile");
+    const file = fileInput.files && fileInput.files[0];
+
+    let proof = "";
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Maksimal ukuran foto bukti 2 MB.");
+        return;
+      }
+      proof = await fileToDataUrl(file);
+    }
+
+    const list = loadTkData();
+    list.unshift({ id: Date.now(), date, week, payer, amount, proof });
+    if (!saveTkData(list)) return;
+
+    fileInput.value = "";
+    renderTkTable();
+  };
+
+  window.deleteTkItem = function(id) {
+    const next = loadTkData().filter(item => item.id !== id);
+    saveTkData(next);
+    renderTkTable();
+  };
+
+  window.viewTkProof = function(id) {
+    const item = loadTkData().find(r => r.id === id);
+    if (!item || !item.proof) return;
+    document.getElementById("tkProofTitle").textContent = `Bukti Token · ${item.payer} (${item.week} - ${fmtRp(item.amount)})`;
+    document.getElementById("tkProofImg").src = item.proof;
+    document.getElementById("tkProofModal").style.display = "flex";
+  };
+
+  window.closeTkProofModal = function() {
+    document.getElementById("tkProofModal").style.display = "none";
+    document.getElementById("tkProofImg").src = "";
+  };
+
+  function renderTkTable() {
+    const list = loadTkData();
+    const tbody = document.getElementById("tkHistoryBody");
+    const totalEl = document.getElementById("tokenTotalSummary");
+    const nextBadge = document.getElementById("tokenNextBadge");
+    const payerSel = document.getElementById("tkPayerInput");
+    if (!tbody) return;
+
+    const nextPerson = TK_MEMBERS[list.length % TK_MEMBERS.length];
+    if (nextBadge) nextBadge.textContent = nextPerson;
+    if (payerSel && !payerSel.dataset.picked) payerSel.value = nextPerson;
+
+    const sumAll = list.reduce((acc, r) => acc + Number(r.amount || 0), 0);
+    if (totalEl) totalEl.textContent = fmtRp(sumAll);
+
+    if (list.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="padding:14px; text-align:center; color:var(--text-sub);">Belum ada data token (4 minggu = Rp 200.000/bulan).</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = list.map((r, i) => `
+      <tr>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">#${list.length - i}</td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">${r.date}</td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">${r.week}</td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);"><strong>${r.payer}</strong></td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">${fmtRp(r.amount)}</td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">
+          ${r.proof
+            ? `<button type="button" onclick="viewTkProof(${r.id})" style="cursor:pointer; padding:4px 10px; border-radius:6px;">Lihat Foto</button>`
+            : `<span style="opacity:0.65;">-</span>`}
+        </td>
+        <td style="padding:9px 10px; border-bottom:1px solid var(--border-color);">
+          <button type="button" onclick="deleteTkItem(${r.id})" style="cursor:pointer; padding:4px 8px; border-radius:6px;">Hapus</button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const d = document.getElementById("tkDateInput");
+    if (d && !d.value) d.value = new Date().toISOString().split("T")[0];
+    const p = document.getElementById("tkPayerInput");
+    if (p) p.addEventListener("change", () => { p.dataset.picked = "1"; });
+    renderTkTable();
+  });
+})();
+</script>
+
     <!-- TAB 4: WATER PAM (AIR PAM) -->
     <section id="panel-water" class="tab-panel hidden" style="display:flex; flex-direction:column; gap:20px;">
       <div class="card">
